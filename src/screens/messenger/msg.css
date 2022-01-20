@@ -1,0 +1,155 @@
+.nav{
+    height: 5vh;
+    border-bottom: 1px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+.msgContainer{
+    display: flex;
+    height: 95vh;
+}
+
+.chatMenu{
+    flex: 3;
+}
+
+.chatMenuInput{
+    padding: 10px;
+    border: none;
+    border-bottom: 1px solid gray;
+}
+
+.chatBox{
+    flex:10;
+    position: relative;
+}
+
+.chatBoxWrapper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    border-right: 1px solid #e3e3e3;
+    border-left: 1px solid #e3e3e3;
+
+}
+
+.chatBoxTop{
+    height: 100%;
+    overflow-y: auto;
+    padding-right: 10px;
+}
+
+/* scroll  */
+.chatBoxTop::-webkit-scrollbar {
+    width: 4px;
+    height: 4px;
+  }
+
+  .chatBoxTop::-webkit-scrollbar {
+    cursor:pointer !important;
+
+  }
+  *::-webkit-scrollbar-thumb {
+    background-color: #b1b1b1;
+    border-radius: 10px;
+    box-shadow: none;
+    border-color: none;
+  }
+  *::-webkit-scrollbar-thumb:hover {
+    background-color: #858585;
+    cursor: grab;
+  }
+
+.chatOnline{
+    flex:3
+}
+
+.chatBoxWrapper{
+    height: 94%;
+}
+
+.chatMenuWrapper,  .chatOnlineWrapper{
+    padding: 10px;
+    height: 100%;
+}
+
+.chatBoxBottom{
+    /* margin-top: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between; */
+    border-top: 1px solid #e3e3e3;
+}
+
+.chatMessageInput{
+    padding: 10px;
+    margin-right: 5px;
+}
+
+
+.footerMsg{
+    margin: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.chatOnlineTitle, .chatMenuTitle{
+    border-bottom: 1px solid gray;
+    padding: 5px;
+}
+
+.noConversationChat{
+    font-size: 34px;
+    color: #e2e2e2;
+    cursor: default;
+}
+
+.noChat{
+    display: flex;
+    justify-content: center;
+    border-bottom: 1px solid #e2e2e2;
+}
+
+.chatSubmitButton{
+    border: none;
+    border-radius: 5px;
+    background: teal;
+    color: #fff;
+}
+
+.chatSubmitButton:hover{
+    background: teal;
+    color: #fff;
+}
+
+
+.chatHeader{
+    display: flex;
+    padding: 10px;
+    height: 6%;
+    border-bottom: 1px solid #e2e2e2;
+    border-right: 1px solid #e2e2e2;
+    border-left: 1px solid #e2e2e2;
+    justify-content: space-between;
+}
+
+.chatHeaderAvatar{
+    margin-right: 20px;
+    background: #fde3cf;
+    color: #f56a00;
+    vertical-align: middle;
+    user-select: none;
+}
+
+.chatHeadName{
+    display: flex;
+    align-items: center;
+}
+
+.chatHeaderButton{
+    display: flex;
+    align-items: center;
+}

@@ -1,0 +1,19 @@
+.conversation{
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-bottom: 1px solid #e3e3e3;
+}
+
+.avatarConversation{
+    margin-right: 10px;
+    background: #fde3cf;
+    color: #f56a00;
+    vertical-align: middle;
+    user-select: none;
+}
+
+.conversation:hover{
+    background: rgb(235, 235, 235);
+}
