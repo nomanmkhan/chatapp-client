@@ -241,6 +241,7 @@ export default function Messenger() {
                                                     placeholder="Type a message"
                                                 />
 
+
                                                 {/* <Button disabled={newMessage === ""} className='chatSubmitButton' onClick={() => handleSubmit()} >Send <SendOutlined /></Button> */}
                                             </div>
                                         </div>
