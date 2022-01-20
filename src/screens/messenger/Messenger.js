@@ -33,7 +33,7 @@ export default function Messenger() {
     const socket = useRef();
 
     useEffect(() => {
-        socket.current = io("ws://chatapp-client-nmk.herokuapp.com:8900");
+        socket.current = io("https://chatapp-server-nmk.herokuapp.com/");
         socket.current.on("getMessage", (data) => {
 
             setArrivalMessage({
