@@ -31,7 +31,7 @@ function Login(props) {
             email: email.trim(),
             password: password.trim(),
         }
-        fetch("http://172.16.2.109:4000/api/login", {
+        fetch("https://chatapp-server-nmk.herokuapp.com/api/login", {
             "method": "POST",
             "headers": {
                 "content-type": "application/json",

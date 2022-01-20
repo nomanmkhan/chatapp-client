@@ -13,7 +13,7 @@ import useSound from 'use-sound';
 import notify from "./notification.mp3"
 import InputEmoji from 'react-input-emoji'
 
-const baseurl = "http://172.16.2.109:4000/api"
+const baseurl = "https://chatapp-server-nmk.herokuapp.com/api"
 const userId = readCookie('id');
 const { TextArea } = Input;
 
@@ -33,7 +33,7 @@ export default function Messenger() {
     const socket = useRef();
 
     useEffect(() => {
-        socket.current = io("ws://172.16.2.109:8900");
+        socket.current = io("ws://https://chatapp-server-nmk.herokuapp.com:8900");
         socket.current.on("getMessage", (data) => {
 
             setArrivalMessage({

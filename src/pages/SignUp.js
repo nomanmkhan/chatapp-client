@@ -48,7 +48,7 @@ function SignUp(props) {
             username: username.trim(),
             password: password.trim(),
         }
-        await fetch("http://172.16.2.109:4000/api/register", {
+        await fetch("https://chatapp-server-nmk.herokuapp.com/api/register", {
             "method": "POST",
             "headers": {
                 "content-type": "application/json",

@@ -3,7 +3,7 @@ import "./chatOnline.css"
 import { Avatar, Badge } from 'antd';
 import { readCookie } from "../../utils/readCookie";
 import axios from 'axios';
-const baseurl = "http://172.16.2.109:4000/api"
+const baseurl = "https://chatapp-server-nmk.herokuapp.com/api"
 
 export default function ChatOnline({ onlineUsers, currentId, own }) {
     const [user, setUser] = useState(null);

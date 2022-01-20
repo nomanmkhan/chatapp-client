@@ -4,7 +4,7 @@ import "./conversation.css"
 import { readCookie } from "../../utils/readCookie";
 import axios from "axios"
 
-const baseurl = "http://172.16.2.109:4000/api"
+const baseurl = "https://chatapp-server-nmk.herokuapp.com/api"
 
 export default function Conversation({ conversation, currentUser, name }) {
     const [user, setUser] = useState(null);
