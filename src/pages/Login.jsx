@@ -12,7 +12,7 @@ function Login(props) {
     const [disable, setDisable] = useState(false);
 
     async function handleLogin() {
-
+        setDisable(true);
         if (email === "") {
             sendNotification('error', {
                 title: "Email",
@@ -40,10 +40,8 @@ function Login(props) {
             body: JSON.stringify(data)
         })
             .then(async response => {
-                setDisable(true);
                 let result = await response.json()
                 if (response.status === 200) {
-                    setDisable(false);
                     document.cookie = `token=${result.token}`;
                     document.cookie = `username=${result.user.username}`;
                     document.cookie = `email=${result.user.email}`;
@@ -59,6 +57,8 @@ function Login(props) {
                     })
                     setTimeout(() => { setDisable(false); }, 1500)
                 }
+                setDisable(false);
+
             }
             )
             .catch(err => console.log("err", err))
@@ -112,8 +112,8 @@ function Login(props) {
                         >
                             <Input type={"password"} className="inputs" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="password" />
                         </Form.Item>
-                        <Button type="primary" htmlType="submit" loading={disable} onClick={handleLogin} >Login</Button>
-                        <span style={{ textAlign: "right", paddingTop: "15px", fontSize: "12px", }}>Don't have an account? <Link style={{ color: "#1890ff" }} to="/signup">Register here</Link> </span>
+                        <Button className='btnLogin' type="primary" htmlType="submit" loading={disable} onClick={handleLogin} >Login</Button>
+                        <span style={{ textAlign: "right", paddingTop: "15px", fontSize: "12px", }}>Don't have an account? <Link style={{ color: "#3b0a50e6", fontWeight:"600" }} to="/signup">Register here</Link> </span>
                     </div>
                 </Form>
             </div >

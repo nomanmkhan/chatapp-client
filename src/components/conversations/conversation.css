@@ -12,8 +12,48 @@
     color: #f56a00;
     vertical-align: middle;
     user-select: none;
+    display: flex;
+    align-items: center;
 }
 
-.conversation:hover{
-    background: rgb(235, 235, 235);
+.conv:hover{
+    background: #fff;
+}
+
+.conv{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #dddddd;
+}
+
+
+.conversationInfo{
+    display: flex;
+    flex-direction: column;
+}
+
+.imageConversation{
+    width: 20%;
+    
+}
+.conversationInfo{
+    width: 80%;
+    padding: 10px;
+}
+
+.nameInfo{
+    display: flex;
+    justify-content: space-between;
+}
+
+.textConversation{
+    display: flex;
+    justify-content: space-between;
+    color: gray;
+    font-weight: 200;
+    min-width: 100px;
+
+    
 }

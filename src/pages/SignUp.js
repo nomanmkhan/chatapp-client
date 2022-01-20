@@ -13,6 +13,7 @@ function SignUp(props) {
     const [disable, setDisable] = useState(false);
 
     async function handleRegister() {
+        setDisable(true)
         if (email === "") {
             sendNotification('error', {
                 title: "Email",
@@ -56,7 +57,6 @@ function SignUp(props) {
             },
             body: JSON.stringify(data)
         }).then(async response => {
-            setDisable(true)
             let result = await response.json();
             if (response.status !== 200) {
                 sendNotification('error', { title: "Registration", msg: result.data })
@@ -76,6 +76,7 @@ function SignUp(props) {
         setEmail('')
         setUsername('')
         setPassword('')
+        setDisable(false)
     }
 
     const sendNotification = (type, data) => {
@@ -130,8 +131,8 @@ function SignUp(props) {
                         >
                             <Input type={"password"} className="inputs" value={password} onChange={(e) => setPassword(e.target.value)} placeholder="Password" />
                         </Form.Item>
-                        <Button type="primary" loading={disable} onClick={handleRegister} >Sign Up</Button>
-                        <span style={{ textAlign: "right", paddingTop: "15px", fontSize: "12px" }}>If already have an account? <Link style={{ color: "#1890ff" }} to="/login" >Login here</Link> </span>
+                        <Button className='btnLogin' type="primary" loading={disable} onClick={handleRegister} >Sign Up</Button>
+                        <span style={{ textAlign: "right", paddingTop: "15px", fontSize: "12px" }}>If already have an account? <Link style={{ color: "#3b0a50e6", fontWeight:"600"  }} to="/login" >Login here</Link> </span>
                     </div>
                 </Form>
 

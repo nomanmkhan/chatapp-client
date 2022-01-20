@@ -1,11 +1,4 @@
-.nav{
-    height: 5vh;
-    border-bottom: 1px solid gray;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 0 20px;
-}
+
 .msgContainer{
     display: flex;
     height: 95vh;
@@ -13,6 +6,7 @@
 
 .chatMenu{
     flex: 3;
+    border-right: 1px solid #e3e3e3;
 }
 
 .chatMenuInput{
@@ -42,12 +36,12 @@
 }
 
 /* scroll  */
-.chatBoxTop::-webkit-scrollbar {
+.chatBoxTop::-webkit-scrollbar, .chatMenuWrapper::-webkit-scrollbar {
     width: 4px;
     height: 4px;
   }
 
-  .chatBoxTop::-webkit-scrollbar {
+  .chatBoxTop::-webkit-scrollbar, .chatMenuWrapper::-webkit-scrollbar {
     cursor:pointer !important;
 
   }
@@ -63,16 +57,38 @@
   }
 
 .chatOnline{
-    flex:3
+    flex:3;
+    border-left: 1px solid #e3e3e3;
+
 }
 
 .chatBoxWrapper{
     height: 94%;
 }
 
-.chatMenuWrapper,  .chatOnlineWrapper{
+.conversationTitle{
+    height: 6%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding-left: 20px;
+    background: #f9f9f9 !important;
+}
+
+.conversationTitle h3{
+    margin: 0;
+}
+
+.chatMenuWrapper{
+    height: 94%;
+    overflow-y: auto;
+     background: #f9f9f9;
+}
+
+.chatOnlineWrapper{
     padding: 10px;
-    height: 100%;
+    height: 94%;
+    background: #f9f9f9;
 }
 
 .chatBoxBottom{
@@ -153,3 +169,17 @@
     display: flex;
     align-items: center;
 }
+
+
+.conversationTitle{
+    background: #fff;
+    border-bottom: 1px solid;
+}
+
+.selectConversation:hover{
+    cursor: pointer;
+}
+
+/* .selectConversation:select{
+    background: chartreuse;
+} */

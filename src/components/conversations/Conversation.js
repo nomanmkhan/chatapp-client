@@ -3,6 +3,7 @@ import { Avatar } from 'antd';
 import "./conversation.css"
 import { readCookie } from "../../utils/readCookie";
 import axios from "axios"
+import moment from 'moment';
 
 const baseurl = "https://chatapp-server-nmk.herokuapp.com/api"
 
@@ -22,11 +23,16 @@ export default function Conversation({ conversation, currentUser, name }) {
         }
         getUser();
     }, [conversation, currentUser])
-
     return (
-        <div className='conversation'>
-            <Avatar className='avatarConversation' size="large" >{ user && (user?.username.split('')[0]).toUpperCase()}</Avatar>
-            <span>{user?.username}</span>
-        </div>
+            <div className='conv'>
+                <div className='imageConversation' > <Avatar style={{ width: "50px", height: "50px" }} className='avatarConversation' size="large" >{user && (user?.username.split('')[0]).toUpperCase()}</Avatar> </div>
+                <div className='conversationInfo' >
+                    <div className='nameInfo' >
+                        <h4>{user?.username}</h4>
+                        {/* <div> <span style={{fontSize:"9px", color:"gray"}} > {moment(conversation?.lastMessage?.time).fromNow()}</span></div> */}
+                    </div>
+                    <div className='textConversation' ><span>{conversation?.lastMessage?.msg.substring(0,25) + "..."}</span><div> <span style={{fontSize:"9px", color:"gray"}} > {moment(conversation?.lastMessage?.time).fromNow()}</span></div></div>
+                </div>
+            </div>
     )
 }

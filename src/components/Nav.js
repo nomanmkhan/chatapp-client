@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { Button } from "antd"
-import { LogoutOutlined } from "@ant-design/icons"
+import { LogoutOutlined, WechatOutlined } from "@ant-design/icons"
 import { readCookie } from "../utils/readCookie";
+
+import "./nav.css"
 
 function Nav(props) {
     const [user, setUser] = useState(null);
@@ -17,18 +19,15 @@ function Nav(props) {
         window.location = "/login";
     }
 
-    useEffect(() => {
-        const userName = (name) => {
-            setUser(name.charAt(0).toUpperCase() + name.slice(1))
-        }
-        userName(readCookie('username'))
-    }, [user])
+
 
     return (
         <div className='nav'>
-            <h2 style={{ color: "grey" }} >messages</h2>
-            <h4>Hello {user} </h4>
-            <Button icon={<LogoutOutlined />} onClick={handleLogout} />
+            <div className='logo' >
+                <WechatOutlined className='logoImg' />
+                <span className='logoText'>ChatApp</span>
+            </div>
+            <LogoutOutlined className='logout' onClick={handleLogout} />
         </div >
     );
 }

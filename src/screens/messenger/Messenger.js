@@ -22,6 +22,7 @@ export default function Messenger() {
     const [play] = useSound(notify);
     notification.config({ duration: 2 });
     const scrollRef = useRef()
+    const convTab = useRef(null)
     const [conversation, setConversation] = useState([]);
     const [currentChat, setCurrentChat] = useState(null);
     const [messages, setMessages] = useState([]);
@@ -84,6 +85,7 @@ export default function Messenger() {
     useEffect(() => {
 
         if (currentChat) {
+            console.log("convTab", convTab.current)
             const getMessages = async () => {
                 try {
                     const res = await axios.get(`${baseurl}/message/${currentChat.id}`, { headers: { Authorization: 'Bearer ' + readCookie('token') } })
@@ -195,14 +197,17 @@ export default function Messenger() {
             <Nav />
             <div className='msgContainer' >
                 <div className='chatMenu' >
+                    <div className='conversationTitle' ><h3> All Conversation</h3></div>
                     <div className='chatMenuWrapper' >
-                        <div className='chatMenuTitle' ><h3>Friend List</h3></div>
-                        <Input placeholder='search for friends' className='chatMenuInput' />
-                        {conversation?.map((c, index) => (
-                            <div key={index} onClick={() => setCurrentChat(c)}  >
-                                <Conversation conversation={c} currentUser={userId} />
-                            </div>
-                        ))}
+                        {/* <div className='chatMenuTitle' ><h3>Friend List</h3></div> */}
+                        {/* <Input placeholder='search for friends' className='chatMenuInput' /> */}
+                        {conversation?.map((c, index) => {
+                            return (
+                                <div ref={convTab} id={index} className='selectConversation' key={index} onClick={(e) => setCurrentChat(c)}  >
+                                    <Conversation conversation={c} currentUser={userId} />
+                                </div>
+                            )
+                        })}
                     </div>
                 </div>
                 <div className='chatBox' >
@@ -253,8 +258,9 @@ export default function Messenger() {
                     </>
                 </div>
                 <div className='chatOnline' >
+                    <div className='conversationTitle' ><h3> Online ({onlineUsers.length}) </h3></div>
                     <div className='chatOnlineWrapper' >
-                        <div className='chatOnlineTitle' ><h3>Online ({onlineUsers.length})</h3></div>
+                        {/* <div className='chatOnlineTitle' ><h3>Online ({onlineUsers.length})</h3></div> */}
                         {
                             onlineUsers?.map(user => {
                                 return (

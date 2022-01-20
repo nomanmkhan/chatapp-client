@@ -1,0 +1,37 @@
+.nav{
+    height: 5vh;
+    border-bottom: 1px solid gray;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    background-color: #3b0a50e6;
+    border: none;
+}
+
+
+.nav h4{
+    color: #fff;
+    font-weight: 600;
+}
+
+.logout{
+    color: #fff;
+    font-size: 16px;
+    font-weight: 600;
+}
+.logo{
+    display: flex;
+    align-items: center;
+}
+.logoImg{
+    color: #f5f5f5;
+    font-size: 25px;
+    margin-right: 10px;
+}
+
+.logoText{
+    color: #f5f5f5;
+    font-weight: 600;
+    font-size: 14px;
+}
