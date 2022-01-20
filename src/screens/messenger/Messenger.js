@@ -33,7 +33,7 @@ export default function Messenger() {
     const socket = useRef();
 
     useEffect(() => {
-        socket.current = io("ws://https://chatapp-server-nmk.herokuapp.com:8900");
+        socket.current = io("ws://172.16.2.109:8900");
         socket.current.on("getMessage", (data) => {
 
             setArrivalMessage({
@@ -225,7 +225,7 @@ export default function Messenger() {
                                                 </div>
                                             ))}
                                         </div>
-                                        
+
                                         <div className='chatBoxBottom' >
                                             <div className='footerMsg' >
                                                 {/* <Input
