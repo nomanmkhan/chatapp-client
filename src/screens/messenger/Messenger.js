@@ -225,6 +225,7 @@ export default function Messenger() {
                                                 </div>
                                             ))}
                                         </div>
+                                        
                                         <div className='chatBoxBottom' >
                                             <div className='footerMsg' >
                                                 {/* <Input
