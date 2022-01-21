@@ -12,7 +12,7 @@
 }
 
 .message.own .msgText{
-    background: rgb(231, 231, 231);
+    background: #f3f3f3;
     color: #000;
 }
 
@@ -28,7 +28,8 @@
 .msgText{
     padding: 10px;
     border-radius: 20px;
-    background: #1877f2;
+    background: #4e2261;
+    /* background: #1877f2; */
     color: #fff;
     max-width: 30rem;
     border-radius: 0 20px 20px 20px;

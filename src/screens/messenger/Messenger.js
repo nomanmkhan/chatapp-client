@@ -5,8 +5,8 @@ import ChatOnline from '../../components/chatOnline/ChatOnline'
 import Nav from "../../components/Nav"
 import "./msg.css"
 import { readCookie } from "../../utils/readCookie";
-import { SendOutlined, CloseCircleOutlined } from "@ant-design/icons"
-import { Input, Button, Popconfirm, notification, Avatar } from "antd"
+import { SendOutlined, CloseCircleOutlined, WarningTwoTone } from "@ant-design/icons"
+import { Input, Button, Popconfirm, notification, Avatar, } from "antd"
 import axios from 'axios'
 import { io } from "socket.io-client";
 import useSound from 'use-sound';
@@ -31,6 +31,9 @@ export default function Messenger() {
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [friend, setFriend] = useState(null);
     const [flag, setFlag] = useState(false);
+    const [typingData, setTypingData] = useState(null)
+    const [typing, setTyping] = useState(false)
+
     const socket = useRef();
 
     useEffect(() => {
@@ -42,6 +45,14 @@ export default function Messenger() {
                 text: data.text,
                 createdAt: Date.now()
             })
+        })
+        socket.current.on('display', (data) => {
+            setTypingData(data)
+            if(data.typing){
+                setTyping(true)
+            }else{
+                setTyping(false)
+            }
         })
     }, [])
 
@@ -85,7 +96,6 @@ export default function Messenger() {
     useEffect(() => {
 
         if (currentChat) {
-            console.log("convTab", convTab.current)
             const getMessages = async () => {
                 try {
                     const res = await axios.get(`${baseurl}/message/${currentChat.id}`, { headers: { Authorization: 'Bearer ' + readCookie('token') } })
@@ -111,7 +121,21 @@ export default function Messenger() {
         }
     }, [currentChat])
 
+    useEffect(() => {
+        if (newMessage !== "") {
+            setTyping(true)
+            socket.current.emit('typing', { typing: true, userId })
+        } else {
+            setTyping(false)
+        }
+
+    }, [newMessage])
+
+    console.log("111",typing)
+
     const handleSubmit = async () => {
+        setTyping(false);
+        socket.current.emit('typing', { typing: false, userId })
         const message = {
             text: newMessage.trim(),
             conversationId: currentChat.id
@@ -142,6 +166,7 @@ export default function Messenger() {
             } else {
                 setMessages([...messages, res?.data?.message])
             }
+            
             setNewMessage("")
 
         } catch (err) {
@@ -151,7 +176,6 @@ export default function Messenger() {
 
     useEffect(() => {
         const scroll = () => {
-            // return scrollRef.current?.scrollIntoView({ behavior: "smooth" })
             return scrollRef.current?.scrollIntoView({ behavior: "smooth" })
         }
         scroll();
@@ -192,6 +216,22 @@ export default function Messenger() {
         });
     };
 
+    function useWindowSize() {
+        const [size, setSize] = useState([window.innerHeight, window.innerWidth]);
+        useEffect(() => {
+            const handleResize = () => {
+                setSize([window.innerHeight, window.innerWidth]);
+            }
+            window.addEventListener("resize", handleResize);
+            return () => {
+                window.addEventListener("resize", handleResize);
+            }
+        }, []);
+        return size;
+    }
+
+    const [height, width] = useWindowSize();
+
     return (
         <div>
             <Nav />
@@ -199,8 +239,6 @@ export default function Messenger() {
                 <div className='chatMenu' >
                     <div className='conversationTitle' ><h3> All Conversation</h3></div>
                     <div className='chatMenuWrapper' >
-                        {/* <div className='chatMenuTitle' ><h3>Friend List</h3></div> */}
-                        {/* <Input placeholder='search for friends' className='chatMenuInput' /> */}
                         {conversation?.map((c, index) => {
                             return (
                                 <div ref={convTab} id={index} className='selectConversation' key={index} onClick={(e) => setCurrentChat(c)}  >
@@ -217,8 +255,8 @@ export default function Messenger() {
                                 <>
                                     <div className='chatHeader'  >
                                         <div className='chatHeadName'>
-                                            <Avatar className='chatHeaderAvatar' size="large" >U</Avatar>
-                                            <span>{friend && friend?.username}</span>
+                                            <Avatar className='chatHeaderAvatar' size="large" >{friend && (friend?.username.split('')[0]).toUpperCase()}</Avatar>
+                                            <span style={{ fontWeight: "bold" }} >{friend && friend?.username}</span>
                                         </div>
                                         <div className='chatHeaderButton' ><CloseCircleOutlined style={{ fontSize: "18px", fontWeight: "400" }} onClick={() => handleClose()} /></div>
                                     </div>
@@ -230,7 +268,7 @@ export default function Messenger() {
                                                 </div>
                                             ))}
                                         </div>
-
+                                            { currentChat &&  typingData && typingData.userId === friend.id && <div style={{display:"flex", justifyContent:"center", color:"gray" }}>{typing && `${friend.username} is typing..` }</div>}
                                         <div className='chatBoxBottom' >
                                             <div className='footerMsg' >
                                                 {/* <Input
@@ -253,7 +291,14 @@ export default function Messenger() {
                                         </div>
                                     </div>
                                 </>
-                                : <div className='noChat' ><span className='noConversationChat'>Open a conversation to start a chat</span></div>
+                                :
+                                <div className='noChat' >
+                                    <WarningTwoTone style={{ fontSize: "70px" }} twoToneColor={"#581b72e6"} />
+                                    <div className='noChatText' style={{ textAlign: "center" }} >
+                                        <h2>Stay connected together</h2>
+                                        <h5>Open a chat to start a conversation</h5>
+                                    </div>
+                                </div>
                         }
                     </>
                 </div>
@@ -264,17 +309,24 @@ export default function Messenger() {
                         {
                             onlineUsers?.map(user => {
                                 return (
-                                    <Popconfirm
-                                        placement="left"
-                                        title="Create chat with this friend?"
-                                        onConfirm={() => confirm(user)}
-                                        okText="add"
-                                        cancelText="cancel"
-                                    >
-                                        <div  >
-                                            {<ChatOnline own={user.userId === userId} onlineUsers={user} currentId={userId} />}
-                                        </div>
-                                    </Popconfirm>
+                                    <>
+                                        {user.userId !== userId ?
+                                            <Popconfirm
+                                                placement="left"
+                                                title="Create chat with this friend?"
+                                                onConfirm={() => confirm(user)}
+                                                okText="add"
+                                                cancelText="cancel"
+                                            >
+                                                <div  >
+                                                    {<ChatOnline own={user.userId === userId} onlineUsers={user} currentId={userId} />}
+                                                </div>
+                                            </Popconfirm>
+                                            : <div  >
+                                                {<ChatOnline own={user.userId === userId} onlineUsers={user} currentId={userId} />}
+                                            </div>}
+
+                                    </>
                                 )
                             }
                             )

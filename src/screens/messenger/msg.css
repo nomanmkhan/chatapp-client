@@ -52,12 +52,12 @@
     border-color: none;
   }
   *::-webkit-scrollbar-thumb:hover {
-    background-color: #858585;
+    background-color: #3b0a50e6;
     cursor: grab;
   }
 
 .chatOnline{
-    flex:3;
+    flex:2;
     border-left: 1px solid #e3e3e3;
 
 }
@@ -86,7 +86,6 @@
 }
 
 .chatOnlineWrapper{
-    padding: 10px;
     height: 94%;
     background: #f9f9f9;
 }
@@ -97,6 +96,7 @@
     align-items: center;
     justify-content: space-between; */
     border-top: 1px solid #e3e3e3;
+    background: #f9f9f9;
 }
 
 .chatMessageInput{
@@ -118,15 +118,23 @@
 }
 
 .noConversationChat{
-    font-size: 34px;
+    font-size: 24px;
     color: #e2e2e2;
     cursor: default;
 }
 
 .noChat{
     display: flex;
+    flex-direction: column;
     justify-content: center;
-    border-bottom: 1px solid #e2e2e2;
+    padding-top: 200px;
+    align-items: center;
+}
+
+.noChatText h2{
+    margin: 0;
+    padding: 10px;
+
 }
 
 .chatSubmitButton{
@@ -143,19 +151,18 @@
 
 
 .chatHeader{
+    background: #f9f9f9;
     display: flex;
     padding: 10px;
     height: 6%;
-    border-bottom: 1px solid #e2e2e2;
-    border-right: 1px solid #e2e2e2;
-    border-left: 1px solid #e2e2e2;
+    border-bottom: 1px solid #252525;
     justify-content: space-between;
 }
 
 .chatHeaderAvatar{
     margin-right: 20px;
-    background: #fde3cf;
-    color: #f56a00;
+    background: #4e2261;
+    color: #f9f9f9;
     vertical-align: middle;
     user-select: none;
 }

@@ -26,14 +26,17 @@ export default function ChatOnline({ onlineUsers, currentId, own }) {
     }, [onlineUsers, currentId])
 
     return (
-        <div className='chatOnline'>
-            <div className='chatOnlineFriend'>
-                <div className='chatOnlineContainer' >
-                    <Avatar className='chatOnlineImage' size={"large"}  >{user && (user.username.split('')[0]).toUpperCase()}</Avatar>
-                    <div className='chatOnlineBadge' />
+        <>
+            <div className='onlineUser' >
+                <div className='chatOnlineFriend'>
+                    <div className='chatOnlineContainer' >
+                        <Avatar className='chatOnlineImage' size={"large"}  >{user && (user.username.split('')[0]).toUpperCase()}</Avatar>
+                        <div className='chatOnlineBadge' />
+                    </div>
+                    <span className='chatOnlineName' >{user?.username} {own && "(me)"} </span>
                 </div>
-                <span className='chatOnlineName' >{user?.username} {own && "(me)"} </span>
             </div>
-        </div>
+
+        </>
     )
 }
